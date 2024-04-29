@@ -1,0 +1,19 @@
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb"; 
+import { DynamoDBDocumentClient, PutCommand } from "@aws-sdk/lib-dynamodb";
+
+
+export const handler = async (event) => {
+  const client = new DynamoDBClient({});
+  const ddbDocClient = DynamoDBDocumentClient.from(client);
+  
+  try {
+    await ddbDocClient.send(
+      new PutCommand({
+        TableName: "FovusTable",
+        Item: event,
+      })
+    );
+  } catch (error) {
+    throw error;
+  }
+};

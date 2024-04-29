@@ -1,17 +1,25 @@
+/* eslint-disable no-undef */
 import { useState } from "react";
 // import AWS from 'aws-sdk'; // Import entire SDK (optional)
 // import AWS from 'aws-sdk/global'; // Import global AWS namespace (recommended)
 import S3 from "aws-sdk/clients/s3"; // Import only the S3 client
+import axios from "axios";
 
 import "./App.css";
 
 function App() {
+  const [text, setText] = useState("");
   const [file, setFile] = useState(null);
 
   const fileTypes = ["text/plain"];
 
-  const handleFile = (e) => {
-    const uploadedFile = e.target.files[0];
+  const handleText = (event) => {
+    event.preventDefault();
+    setText(event.target.value);
+  };
+
+  const handleFile = (event) => {
+    const uploadedFile = event.target.files[0];
 
     if (uploadedFile && fileTypes.includes(uploadedFile.type)) {
       setFile(uploadedFile);
@@ -20,7 +28,26 @@ function App() {
     }
   };
 
-  const handleUpload = async () => {
+  const updateDynamoDB = async (data) => {
+    const payload = {
+      id: data.id,
+      text_input: data.text_input,
+      file_path_name: data.file_path_name,
+    };
+    console.log(payload);
+
+    try {
+      const response = await axios.post(
+        "https://h5gooh27h7.execute-api.us-west-1.amazonaws.com/dev",
+        payload,
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleSubmit = async () => {
     // temporary solution, convert to lambda later
     const s3 = new S3({
       region: process.env.REACT_APP_AWS_REGION,
@@ -35,6 +62,12 @@ function App() {
     };
 
     try {
+      updateDynamoDB({
+        id: 1,
+        text_input: text,
+        file_path_name: `ryfovusbucket/${file.name}`,
+      });
+
       const upload = await s3.upload(params).promise();
       console.log(upload);
       alert("File uploaded successfully!");
@@ -61,6 +94,8 @@ function App() {
                 id="first_name"
                 className="block w-72 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder=""
+                value={text}
+                onChange={handleText}
                 required
               />
             </div>
@@ -82,9 +117,9 @@ function App() {
           </div>
 
           <button
-            type="submit"
+            type="button"
             className="mt-5 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            onClick={() => handleUpload()}
+            onClick={handleSubmit}
           >
             Submit
           </button>
