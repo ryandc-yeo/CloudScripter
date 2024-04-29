@@ -8,7 +8,7 @@ import "./App.css";
 function App() {
   const [file, setFile] = useState(null);
 
-  const fileTypes = ["image/jpeg", "image/png", "image/jpg"];
+  const fileTypes = ["text/plain"];
 
   const handleFile = (e) => {
     const uploadedFile = e.target.files[0];
