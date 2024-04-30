@@ -31,14 +31,13 @@ function App() {
   const updateDynamoDB = async (data) => {
     const payload = {
       id: data.id,
-      text_input: data.text_input,
-      file_path_name: data.file_path_name,
+      input_text: data.input_text,
+      input_file_path: data.input_file_path,
     };
-    console.log(payload);
 
     try {
       const response = await axios.post(
-        "https://h5gooh27h7.execute-api.us-west-1.amazonaws.com/dev",
+        "https://nkvhggb4xl.execute-api.us-west-1.amazonaws.com/dev",
         payload,
       );
       console.log(response.data);
@@ -63,9 +62,9 @@ function App() {
 
     try {
       updateDynamoDB({
-        id: 1,
-        text_input: text,
-        file_path_name: `ryfovusbucket/${file.name}`,
+        id: "1",
+        input_text: text,
+        input_file_path: `ryfovusbucket/${file.name}`,
       });
 
       const upload = await s3.upload(params).promise();
