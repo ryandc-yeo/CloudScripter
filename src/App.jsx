@@ -4,6 +4,7 @@ import { useState } from "react";
 // import AWS from 'aws-sdk/global'; // Import global AWS namespace (recommended)
 import S3 from "aws-sdk/clients/s3"; // Import only the S3 client
 import axios from "axios";
+import { nanoid } from "nanoid";
 
 import "./App.css";
 
@@ -48,6 +49,7 @@ function App() {
 
   const handleSubmit = async () => {
     // temporary solution, convert to lambda later
+    const bucket = process.env.REACT_APP_AWS_BUCKET_NAME;
     const s3 = new S3({
       region: process.env.REACT_APP_AWS_REGION,
       accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
@@ -55,16 +57,16 @@ function App() {
     });
 
     const params = {
-      Bucket: process.env.REACT_APP_AWS_BUCKET_NAME,
+      Bucket: bucket,
       Key: file.name,
       Body: file,
     };
 
     try {
       updateDynamoDB({
-        id: "1",
+        id: nanoid(8),
         input_text: text,
-        input_file_path: `ryfovusbucket/${file.name}`,
+        input_file_path: `${bucket}/${file.name}`,
       });
 
       const upload = await s3.upload(params).promise();
