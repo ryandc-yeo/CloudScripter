@@ -34,6 +34,7 @@ function App() {
       id: data.id,
       input_text: data.input_text,
       input_file_path: data.input_file_path,
+      verified: false,
     };
 
     try {
