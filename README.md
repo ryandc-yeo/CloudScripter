@@ -48,7 +48,7 @@ git push -u origin main
 
 ### 4. Create IAM User
 
-Create a new [user]() and attach the policy `AdministratorAccess-Amplify`.
+Create a new user and attach the policy `AdministratorAccess-Amplify`.
 ![attach policies for new IAM user](image-2.png)
 
 Save the arn (arn:aws:iam::123456789012:user/your-user) for the next section.
