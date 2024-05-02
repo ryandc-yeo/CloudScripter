@@ -318,6 +318,14 @@ VITE_AWS_REGION=<region_name>
 
 You can now save and deploy your Amplify hosted app!
 
+## Takeaways
+
+I had a lot of fun over the past few days getting familiar with the different AWS services and automating it all. The largest blocker was having to implement the AWS SDK using JavaScript V3 because whenever I ran into issues, the forums were mostly solutions for V2, therefore I heavily relied on the official documentation throughout this process.
+
+I managed to meet all the basic requirements, and a few of the bonus points, such as: using Amplify hosting for CI/CD and using ReactJS/Flowbite TailwindCSS for response UI.
+
+If given more time and experience, I would have definitely used AWS Cognito as API-Gateway Authorizer for more security and I would have refined the way I implemented the Lambda trigger, because currently it creates an extra instance after we use the EC2 script to update our DynamoDB FileTable with `output_file_path`. This imposes extra processing but doesn't actually change the final result though, so it qualifies for the basic requirement.
+
 ## References
 
 Official Documentations:
