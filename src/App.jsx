@@ -1,6 +1,5 @@
 import { useState } from "react";
 import AWS from "aws-sdk";
-import S3 from "aws-sdk/clients/s3";
 import axios from "axios";
 import { nanoid } from "nanoid";
 
@@ -36,10 +35,8 @@ function App() {
     };
 
     try {
-      const response = await axios.post(
-        "https://nkvhggb4xl.execute-api.us-west-1.amazonaws.com/dev",
-        payload,
-      );
+      const api = import.meta.env.VITE_AWS_API;
+      const response = await axios.post(api, payload);
       console.log(response.data);
     } catch (error) {
       console.error(error);
