@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.567.0",
+    "@rollup/plugin-commonjs": "^25.0.7",
     "aws-sdk": "^2.1608.0",
     "axios": "^1.6.8",
     "dotenv": "^16.4.5",

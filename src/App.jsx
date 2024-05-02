@@ -1,8 +1,6 @@
-/* eslint-disable no-undef */
 import { useState } from "react";
-// import AWS from 'aws-sdk'; // Import entire SDK (optional)
-// import AWS from 'aws-sdk/global'; // Import global AWS namespace (recommended)
-import S3 from "aws-sdk/clients/s3"; // Import only the S3 client
+import AWS from "aws-sdk";
+import S3 from "aws-sdk/clients/s3";
 import axios from "axios";
 import { nanoid } from "nanoid";
 
@@ -34,7 +32,7 @@ function App() {
       id: data.id,
       input_text: data.input_text,
       input_file_path: data.input_file_path,
-      verified: false,
+      // verified: false,
     };
 
     try {
@@ -50,11 +48,11 @@ function App() {
 
   const handleSubmit = async () => {
     // temporary solution, convert to lambda later
-    const bucket = process.env.REACT_APP_AWS_BUCKET_NAME;
-    const s3 = new S3({
-      region: process.env.REACT_APP_AWS_REGION,
-      accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
-      secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY,
+    const bucket = import.meta.env.VITE_AWS_BUCKET_NAME;
+    const s3 = new AWS.S3({
+      accessKeyId: import.meta.env.VITE_AWS_ACCESS_KEY_ID,
+      secretAccessKey: import.meta.env.VITE_AWS_SECRET_ACCESS_KEY,
+      region: import.meta.env.VITE_AWS_REGION,
     });
 
     const params = {

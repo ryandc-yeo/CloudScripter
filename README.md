@@ -15,3 +15,4 @@ referred to official documentation from:
 - https://github.com/aws/aws-sdk-js-v3/tree/main/lib/lib-dynamodb
 - https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-enable-cognito-user-pool.html
 - https://stackoverflow.com/questions/46276837/aws-lambda-not-connecting-with-dynamo-db
+- https://github.com/aws/aws-sdk-js/issues/1769
