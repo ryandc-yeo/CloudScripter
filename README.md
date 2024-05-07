@@ -1,8 +1,19 @@
-# Fovus Coding Challenge
+# CloudScripter
 
-This is Ryan Yeo's repository for the Fovus Coding Challenge. Instructions can be found on [this](https://docs.google.com/document/d/1UJUpYPP8u-9AFvzWergmr8gNweNV6v6YSMBZOJpX718/edit) document.
+CloudScripter is a platform designed for automated file processing and script execution in the cloud. It streamlines the process of handling input files, executing scripts, and managing outputs, all within a scalable and efficient cloud infrastructure.
 
-A demo of this project can be found [here](https://main.d1suua672mbhdr.amplifyapp.com/), hosted on Amplify.
+## Tech Stack
+
+- Frontend:
+    - **ReactJS**: Built for responsive UI
+    - **Flowbite TailwindCSS**: Styled Components
+- Backend:
+    - **Amazon S3**: Stores plaintext files that can be uploaded/retrieved by the user or EC2 instance
+    - **DynamoDB**: Database for storing user input and S3 file path
+    - **AWS Lambda**: Serverless functions for handling API requests, triggering script execution, and managing VM instances
+    - **API Gateway**: Entry point for client requests, facilitating communication
+    - **Amazon EC2**: Virtual machine instances for running scripts and processing input files
+    - **AWS IAM**: Identity and Access Management for securing access to AWS resources
 
 ## AWS Setup Instructions
 
@@ -15,7 +26,7 @@ Make sure your node version is >=18.17.0.
 In a new directory, run the following command in your terminal to clone this repository:
 
 ```bash
-git clone https://github.com/ryandc-yeo/fovus.git .
+git clone https://github.com/ryandc-yeo/CloudScripter.git .
 npm install
 ```
 
@@ -318,11 +329,11 @@ VITE_AWS_REGION=<region_name>
 
 You can now save and deploy your Amplify hosted app!
 
+A demo of this project can be found [here](https://main.d1suua672mbhdr.amplifyapp.com/), hosted on Amplify.
+
 ## Takeaways
 
 I had a lot of fun over the past few days getting familiar with the different AWS services and automating it all. The largest blocker was having to implement the AWS SDK using JavaScript V3 because whenever I ran into issues, the forums were mostly solutions for V2, therefore I heavily relied on the official documentation throughout this process.
-
-I managed to meet all the basic requirements, and a few of the bonus points, such as: using Amplify hosting for CI/CD and using ReactJS/Flowbite TailwindCSS for response UI.
 
 If given more time and experience, I would have definitely used AWS Cognito as API-Gateway Authorizer for more security and I would have refined the way I implemented the Lambda trigger, because currently it creates an extra instance after we use the EC2 script to update our DynamoDB FileTable with `output_file_path`. This imposes extra processing but doesn't actually change the final result though, so it qualifies for the basic requirement.
 
