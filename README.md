@@ -1,12 +1,13 @@
 # CloudScripter
 
-CloudScripter is a platform designed for automated file processing and script execution in the cloud. It streamlines the process of handling input files, executing scripts, and managing outputs, all within a scalable and efficient cloud infrastructure.
+CloudScripter is a platform designed for automated file processing and script execution in the cloud. It streamlines the process of handling user input files, managing virtual machine instances, executing scripts, and managing outputs, all within a scalable and efficient cloud infrastructure.
 
 ## Tech Stack
 
 - Frontend:
     - **ReactJS**: Built for responsive UI
     - **Flowbite TailwindCSS**: Styled Components
+    - **AWS Amplify**: Web hosting and general CI/CD purposes
 - Backend:
     - **Amazon S3**: Stores plaintext files that can be uploaded/retrieved by the user or EC2 instance
     - **DynamoDB**: Database for storing user input and S3 file path
@@ -15,9 +16,9 @@ CloudScripter is a platform designed for automated file processing and script ex
     - **Amazon EC2**: Virtual machine instances for running scripts and processing input files
     - **AWS IAM**: Identity and Access Management for securing access to AWS resources
 
-## AWS Setup Instructions
+## Setup Instructions
 
-Follow these steps to set up and run the project:
+Follow these steps to get started and run the project:
 
 ### 1. Clone the Repository
 
